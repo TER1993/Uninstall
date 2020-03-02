@@ -16,23 +16,24 @@ import java.util.Objects;
  */
 public class UninstallBroadcastReceiver extends BroadcastReceiver {
     private static final String ACTION = Intent.ACTION_PACKAGE_REMOVED;
+    private static final String pkgName = "package:com.speedata.speakercheck";
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.d("Uninstall", "1");
-
         if (!TextUtils.equals(ACTION, intent.getAction())) {
-            Log.d("Uninstall", "2");
             return;
         }
-        Log.d("Uninstall", "3");
-        Uri data = intent.getData();
 
+        Uri data = intent.getData();
         String packageName = Objects.requireNonNull(data).toString();
         Log.d("Uninstall", packageName);
-        if (true){
+        if (pkgName.equals(packageName)) {
             Toast.makeText(context, packageName, Toast.LENGTH_SHORT).show();
+            // TODO: 2020/3/2 关闭对讲硬件相关参数
+
+
+
         }
     }
 
